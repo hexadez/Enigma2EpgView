@@ -43,7 +43,7 @@ public class XMLParser {
 
 			HttpResponse httpResponse = httpClient.execute(httpPost);
 			HttpEntity httpEntity = httpResponse.getEntity();
-			xml = EntityUtils.toString(httpEntity);
+			xml = EntityUtils.toString(httpEntity,"UTF-8");
 
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();

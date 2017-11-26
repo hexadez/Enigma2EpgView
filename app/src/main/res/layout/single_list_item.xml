@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <!-- Event description Label -->
-    <TextView android:id="@+id/eventdescriptionextended"
+    <Button
+        android:id="@+id/button_zap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Umschalten"
+        android:onClick="onClickBtn" />
+
+    <TextView
+        android:id="@+id/eventdescriptionextended"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="25dip"
-        android:textStyle="bold"
-        android:paddingTop="10dip"
         android:paddingBottom="10dip"
-        android:textColor="#dc6800"/>
+        android:paddingTop="10dip"
+        android:textColor="#dc6800"
+        android:textSize="25dip"
+        android:textStyle="bold" />
 </LinearLayout>
 

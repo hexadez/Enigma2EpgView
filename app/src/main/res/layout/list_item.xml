@@ -56,7 +56,7 @@
                 android:textColor="#5d5d5d"
                 android:gravity="left"
                 android:textStyle="bold"
-                android:text=" Laufzeit: " >
+                android:text=" Endzeit: " >
             </TextView>
             <TextView
                 android:id="@+id/eventlefttime"

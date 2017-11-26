@@ -34,6 +34,7 @@ public class AndroidXMLParsingActivity extends ListActivity {
 	static final String KEY_SERVICE_REFERENCE = "e2servicereference";
 	static final String	KEY_EVENT = "e2event";
 	static final String KEY_EVENT_SERVICENAME = "e2eventservicename";
+	static final String KEY_EVENT_SERVICEREFERENCE = "e2eventservicereference";
 	static final String KEY_EVENT_TITLE = "e2eventtitle";
 	static final String KEY_EVENT_DESCRIPTION = "e2eventdescription";
 	static final String KEY_EVENT_STARTTIME = "e2eventstart";
@@ -100,12 +101,7 @@ public class AndroidXMLParsingActivity extends ListActivity {
 				// catch only start time (hh:mm:ss) from date string
 				String time = startTimeToString.split("\\s")[3].split("\\.")[0];
 				// get event duration time as Integer from String
-				Integer durationToInt = Integer.parseInt(parserEvents.getValue(e, KEY_EVENT_DURATION));
 				Long durationToLong = Long.parseLong(parserEvents.getValue(e, KEY_EVENT_DURATION));
-				// get minutes from seconds
-				Integer timeLeft = durationToInt/60;
-				//convert Integer to String
-				String timeLeftToString = timeLeft.toString();
 				// calculcate end time (start time + duration in sconds)
 				Long endTime = startTime + durationToLong;
 				cal.setTime(new java.util.Date(endTime * 1000));
@@ -114,6 +110,7 @@ public class AndroidXMLParsingActivity extends ListActivity {
 				String endTimeString = endTimeToString.split("\\s")[3].split("\\.")[0];
 
 				// adding each child node to HashMap key => value
+				map.put(KEY_EVENT_SERVICEREFERENCE, parserEvents.getValue(e, KEY_EVENT_SERVICEREFERENCE));
 				map.put(KEY_EVENT_SERVICENAME, parserEvents.getValue(e, KEY_EVENT_SERVICENAME));
 				map.put(KEY_EVENT_TITLE, parserEvents.getValue(e, KEY_EVENT_TITLE));
 				map.put(KEY_EVENT_DESCRIPTION, parserEvents.getValue(e, KEY_EVENT_DESCRIPTION));
@@ -123,9 +120,7 @@ public class AndroidXMLParsingActivity extends ListActivity {
 				// adding HashList to ArrayList
 				menuEvents.add(map);
 			}
-
 		}
-
 
 		// Adding menuServices to ListView
 		ListAdapter adapter = new SimpleAdapter(this, menuEvents,
@@ -145,10 +140,12 @@ public class AndroidXMLParsingActivity extends ListActivity {
 					int position, long id) {
 				// getting values from selected ListItem
 				String eventdescriptionextended = menuEvents.get(position).get("e2eventdescriptionextended");
+				String e2eventservicereference = menuEvents.get(position).get("e2eventservicereference");
 
 				// Starting new intent
 				Intent in = new Intent(getApplicationContext(), SingleMenuItemActivity.class);
 				in.putExtra(KEY_EVENT_DESCRIPTIONEXTENDED, eventdescriptionextended);
+				in.putExtra(KEY_EVENT_SERVICEREFERENCE, e2eventservicereference);
 				startActivity(in);
 
 			}
