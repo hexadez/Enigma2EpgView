@@ -9,11 +9,13 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.view.View;
 import android.widget.Toast;
-import android.net.Uri;
+import java.lang.Object;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 
 public class SingleMenuItemActivity  extends Activity {
 
@@ -61,9 +63,18 @@ public class SingleMenuItemActivity  extends Activity {
         String serviceID = in.getStringExtra(KEY_EVENT_SERVICEREFERENCE);
         String urlToSend = staticURL+serviceID;
 
-        Intent browserIntent =
-                new Intent(Intent.ACTION_VIEW, Uri.parse(urlToSend));
-        startActivity(browserIntent);
+        // Create a new HttpClient and Post Header
+        DefaultHttpClient httpclient = new DefaultHttpClient();
+        HttpPost httppost = new HttpPost(urlToSend);
+        try {
+            //execute http post
+            HttpResponse response = httpclient.execute(httppost);
+
+        } catch (ClientProtocolException e) {
+                Toast.makeText(this, "Protokolfehler", Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+                Toast.makeText(this, "IOException Fehler", Toast.LENGTH_LONG).show();
+        }
 
         Toast.makeText(this, "Umgeschaltet", Toast.LENGTH_LONG).show();
     }
