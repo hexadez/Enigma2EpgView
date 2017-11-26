@@ -10,9 +10,14 @@ import android.widget.Button;
 import android.view.View;
 import android.widget.Toast;
 import android.net.Uri;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class SingleMenuItemActivity  extends Activity {
 
+    // this is how should URL looks like to zap channel
     // http://192.168.1.200/api/zap?sRef=1:0:19:EF74:3F9:1:C00000:0:0:0:)
 
     Button button;
@@ -59,6 +64,7 @@ public class SingleMenuItemActivity  extends Activity {
         Intent browserIntent =
                 new Intent(Intent.ACTION_VIEW, Uri.parse(urlToSend));
         startActivity(browserIntent);
+
         Toast.makeText(this, "Umgeschaltet", Toast.LENGTH_LONG).show();
     }
 }
