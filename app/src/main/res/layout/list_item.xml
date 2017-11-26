@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!-- Service name Label -->
+        <TextView
+            android:id="@+id/servicename"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#dc6800"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingTop="6dip"
+            android:paddingBottom="2dip" />
+        <!-- Event title label -->
+        <TextView
+            android:id="@+id/eventtitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#acacac"
+            android:paddingBottom="2dip">
+        </TextView>
+        <!-- Linear layout for left time event duration -->
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <!-- Cost Label -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#5d5d5d"
+                android:gravity="left"
+                android:textStyle="bold"
+                android:text="Startzeit: " >
+            </TextView>
+            <TextView
+                android:id="@+id/starttime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#acacac"
+                android:textStyle="bold"
+                android:gravity="left">
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#5d5d5d"
+                android:gravity="left"
+                android:textStyle="bold"
+                android:text=" Laufzeit: " >
+            </TextView>
+            <!-- Price Label -->
+            <TextView
+                android:id="@+id/eventlefttime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#acacac"
+                android:textStyle="bold"
+                android:gravity="left">
+            </TextView>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
