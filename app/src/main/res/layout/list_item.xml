@@ -32,7 +32,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <!-- Cost Label -->
+            <!-- Start time Label -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,6 +49,7 @@
                 android:textStyle="bold"
                 android:gravity="left">
             </TextView>
+            <!-- Duration time Label -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,7 +58,6 @@
                 android:textStyle="bold"
                 android:text=" Laufzeit: " >
             </TextView>
-            <!-- Price Label -->
             <TextView
                 android:id="@+id/eventlefttime"
                 android:layout_width="wrap_content"

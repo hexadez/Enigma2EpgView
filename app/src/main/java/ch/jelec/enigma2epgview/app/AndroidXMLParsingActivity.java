@@ -11,7 +11,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -20,15 +19,13 @@ import org.w3c.dom.NodeList;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Date;
-import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.TimeZone;
+
 
 
 public class AndroidXMLParsingActivity extends ListActivity {
 
 	// All static variables
-	//"http://api.androidhive.info/pizza/?format=xml"
 	static final String URL = "http://192.168.1.200/web/";
 	static final String getAllServices = "getallservices";
 	static final String getEpgServiceNow = "epgservicenow?sRef=";
@@ -92,17 +89,23 @@ public class AndroidXMLParsingActivity extends ListActivity {
 				// creating new HashMap
 				HashMap<String, String> map = new HashMap<String, String>();
 				Element e = (Element) nlEvents.item(y);
-				// adding each child node to HashMap key => value
+				// get event start time as Long from String
 				Long startTime = Long.parseLong(parserEvents.getValue(e, KEY_EVENT_STARTTIME));
+				// create java.util.calendar instance and get date/time from variable startTime (Timestamp)
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(new java.util.Date(startTime * 1000));
 				Date date = cal.getTime();
+				// convert Date date to String
 				String startTimeToString = date.toString();
+				// catch only start time (hh:mm:ss) from date string
 				String time = startTimeToString.split("\\s")[3].split("\\.")[0];
-
+				// get event duration time as Integer from String
 				Integer durationToInt = Integer.parseInt(parserEvents.getValue(e, KEY_EVENT_DURATION));
+				// get minutes from seconds
 				Integer timeLeft = durationToInt/60;
+				//convert Integer to String
 				String timeLeftToString = timeLeft.toString();
+				// adding each child node to HashMap key => value
 				map.put(KEY_EVENT_SERVICENAME, parserEvents.getValue(e, KEY_EVENT_SERVICENAME));
 				map.put(KEY_EVENT_TITLE, parserEvents.getValue(e, KEY_EVENT_TITLE));
 				map.put(KEY_EVENT_DESCRIPTION, parserEvents.getValue(e, KEY_EVENT_DESCRIPTION));
@@ -143,10 +146,4 @@ public class AndroidXMLParsingActivity extends ListActivity {
 			}
 		});
 	}
-
-	public Date getDate(Timestamp timestamp){
-		return new Date(timestamp.getTime());
-	}
-
-
 }
