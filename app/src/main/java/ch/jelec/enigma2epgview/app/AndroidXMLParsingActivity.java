@@ -101,16 +101,24 @@ public class AndroidXMLParsingActivity extends ListActivity {
 				String time = startTimeToString.split("\\s")[3].split("\\.")[0];
 				// get event duration time as Integer from String
 				Integer durationToInt = Integer.parseInt(parserEvents.getValue(e, KEY_EVENT_DURATION));
+				Long durationToLong = Long.parseLong(parserEvents.getValue(e, KEY_EVENT_DURATION));
 				// get minutes from seconds
 				Integer timeLeft = durationToInt/60;
 				//convert Integer to String
 				String timeLeftToString = timeLeft.toString();
+				// calculcate end time (start time + duration in sconds)
+				Long endTime = startTime + durationToLong;
+				cal.setTime(new java.util.Date(endTime * 1000));
+				Date endDate = cal.getTime();
+				String endTimeToString = endDate.toString();
+				String endTimeString = endTimeToString.split("\\s")[3].split("\\.")[0];
+
 				// adding each child node to HashMap key => value
 				map.put(KEY_EVENT_SERVICENAME, parserEvents.getValue(e, KEY_EVENT_SERVICENAME));
 				map.put(KEY_EVENT_TITLE, parserEvents.getValue(e, KEY_EVENT_TITLE));
 				map.put(KEY_EVENT_DESCRIPTION, parserEvents.getValue(e, KEY_EVENT_DESCRIPTION));
 				map.put(KEY_EVENT_STARTTIME, time);
-				map.put(KEY_EVENT_DURATION, timeLeftToString + " Min.");
+				map.put(KEY_EVENT_DURATION, endTimeString);
 				map.put(KEY_EVENT_DESCRIPTIONEXTENDED, parserEvents.getValue(e, KEY_EVENT_DESCRIPTIONEXTENDED));
 				// adding HashList to ArrayList
 				menuEvents.add(map);
