@@ -1,9 +1,14 @@
 package ch.jelec.enigma2epgview.app;
 
+import android.app.ActionBar;
+import android.app.Fragment;
 import android.app.ListActivity;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,22 +16,24 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-
-import android.support.v7.app.AppCompatActivity;
-
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Date;
 import java.util.Calendar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 
 
-public class AndroidXMLParsingActivity extends ListActivity {
+
+public class AndroidXMLParsingActivity extends FragmentActivity  {
 
 	// All static variables
 	static final String URL = "http://192.168.1.200/web/";
@@ -48,6 +55,7 @@ public class AndroidXMLParsingActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		// Menü bekannt geben, dadurch kann unser Fragment Menü-Events verarbeiten
 
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 		StrictMode.setThreadPolicy(policy);
@@ -126,15 +134,16 @@ public class AndroidXMLParsingActivity extends ListActivity {
 		}
 
 		// Adding menuServices to ListView
+		ListActivity listActivity = new ListActivity();
 		ListAdapter adapter = new SimpleAdapter(this, menuEvents,
 				R.layout.list_item,
 				new String[] {KEY_EVENT_SERVICENAME, KEY_EVENT_TITLE, KEY_EVENT_STARTTIME, KEY_EVENT_DURATION}, new int[] {
 						R.id.servicename, R.id.eventtitle, R.id.starttime, R.id.eventlefttime});
 
-		setListAdapter(adapter);
+		listActivity.setListAdapter(adapter);
 
 		// selecting single ListView item
-		ListView lv = getListView();
+		ListView lv = listActivity.getListView();
 
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
@@ -154,4 +163,22 @@ public class AndroidXMLParsingActivity extends ListActivity {
 			}
 		});
 	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.menu_androidxmlparsingactivity, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Wir prüfen, ob Menü-Element mit der ID "action_daten_aktualisieren"
+		// ausgewählt wurde und geben eine Meldung aus
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
+			startActivity(new Intent(this, SettingsActivity.class));
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
 }

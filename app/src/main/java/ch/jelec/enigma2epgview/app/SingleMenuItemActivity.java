@@ -9,7 +9,6 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.view.View;
 import android.widget.Toast;
-import java.lang.Object;
 import java.io.IOException;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -71,9 +70,11 @@ public class SingleMenuItemActivity  extends Activity {
             HttpResponse response = httpclient.execute(httppost);
 
         } catch (ClientProtocolException e) {
-                Toast.makeText(this, "Protokolfehler", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            e.printStackTrace();
         } catch (IOException e) {
-                Toast.makeText(this, "IOException Fehler", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            e.printStackTrace();
         }
 
         Toast.makeText(this, "Umgeschaltet", Toast.LENGTH_LONG).show();
