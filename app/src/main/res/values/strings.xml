@@ -3,4 +3,7 @@
     <string name="app_name">Enigma2 EPG Viewer by Daniel Jelec</string>
     <string name="action_settings">Einstellungen</string>
     <string name="title_activity_einstellungen">Einstellungen</string>
+    <string name="preference_ipaddress_title">IP Adresse der Enigma2 Box</string>
+    <string name="preference_ipaddress_key">ipaddress</string>
+    <string name="preference_ipaddress_default">192.168.1.200</string>
 </resources>

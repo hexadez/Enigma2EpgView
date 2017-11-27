@@ -1,14 +1,10 @@
 package ch.jelec.enigma2epgview.app;
 
-import android.app.ActionBar;
-import android.app.Fragment;
 import android.app.ListActivity;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,16 +21,19 @@ import java.util.Date;
 import java.util.Calendar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.widget.Toast;
-
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 
 
 public class AndroidXMLParsingActivity extends FragmentActivity  {
 
+
+	// Auslesen der ausgewählten Aktienliste aus den SharedPreferences
+	/*SharedPreferences sPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+	String prefIpAddressKey = getString(R.string.preference_ipaddress_key);
+	String prefIpAddressDefault = getString(R.string.preference_ipaddress_default);
+	String ipaddress = sPrefs.getString(prefIpAddressKey, prefIpAddressDefault);*/
 	// All static variables
 	static final String URL = "http://192.168.1.200/web/";
 	static final String getAllServices = "getallservices";
@@ -178,6 +177,7 @@ public class AndroidXMLParsingActivity extends FragmentActivity  {
 			startActivity(new Intent(this, SettingsActivity.class));
 			return true;
 		}
+
 		return super.onOptionsItemSelected(item);
 	}
 
