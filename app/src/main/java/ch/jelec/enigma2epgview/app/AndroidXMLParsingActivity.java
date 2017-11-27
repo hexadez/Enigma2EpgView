@@ -30,10 +30,7 @@ public class AndroidXMLParsingActivity extends FragmentActivity  {
 
 
 	// Auslesen der ausgewählten Aktienliste aus den SharedPreferences
-	/*SharedPreferences sPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-	String prefIpAddressKey = getString(R.string.preference_ipaddress_key);
-	String prefIpAddressDefault = getString(R.string.preference_ipaddress_default);
-	String ipaddress = sPrefs.getString(prefIpAddressKey, prefIpAddressDefault);*/
+
 	// All static variables
 	static final String URL = "http://192.168.1.200/web/";
 	static final String getAllServices = "getallservices";
@@ -133,16 +130,13 @@ public class AndroidXMLParsingActivity extends FragmentActivity  {
 		}
 
 		// Adding menuServices to ListView
-		ListActivity listActivity = new ListActivity();
+		ListView lv = findViewById(android.R.id.list);
 		ListAdapter adapter = new SimpleAdapter(this, menuEvents,
 				R.layout.list_item,
 				new String[] {KEY_EVENT_SERVICENAME, KEY_EVENT_TITLE, KEY_EVENT_STARTTIME, KEY_EVENT_DURATION}, new int[] {
-						R.id.servicename, R.id.eventtitle, R.id.starttime, R.id.eventlefttime});
+				R.id.servicename, R.id.eventtitle, R.id.starttime, R.id.eventlefttime});
 
-		listActivity.setListAdapter(adapter);
-
-		// selecting single ListView item
-		ListView lv = listActivity.getListView();
+		lv.setAdapter(adapter);
 
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
