@@ -2,8 +2,10 @@ package ch.jelec.enigma2epgview.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Button;
@@ -26,7 +28,7 @@ public class SingleMenuItemActivity  extends Activity {
  	// XML node keys
 	static final String KEY_EVENT_DESCRIPTIONEXTENDED = "e2eventdescriptionextended";
 	static final String KEY_EVENT_SERVICEREFERENCE = "e2eventservicereference";
-	static final String staticURL = "http://192.168.1.200/api/zap?sRef=";
+
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -58,8 +60,14 @@ public class SingleMenuItemActivity  extends Activity {
     {
         // getting intent data
         Intent in = getIntent();
+        // Auslesen der ausgewählten Aktienliste aus den SharedPreferences
+        SharedPreferences sPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String prefAktienlisteKey = getString(R.string.preference_ipaddress_key);
+        String prefAktienlisteDefault = getString(R.string.preference_ipaddress_default);
+        String ipaddress = sPrefs.getString(prefAktienlisteKey,prefAktienlisteDefault);
         // Get XML values from previous intent
         String serviceID = in.getStringExtra(KEY_EVENT_SERVICEREFERENCE);
+        String staticURL = "http://"+ipaddress+"/api/zap?sRef=";
         String urlToSend = staticURL+serviceID;
 
         // Create a new HttpClient and Post Header

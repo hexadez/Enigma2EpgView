@@ -32,7 +32,6 @@ public class AndroidXMLParsingActivity extends FragmentActivity  {
 	// Auslesen der ausgewählten Aktienliste aus den SharedPreferences
 
 	// All static variables
-	static final String URL = "http://192.168.1.200/web/";
 	static final String getAllServices = "getallservices";
 	static final String getEpgServiceNow = "epgservicenow?sRef=";
 	// XML node keys
@@ -64,6 +63,13 @@ public class AndroidXMLParsingActivity extends FragmentActivity  {
 		Log.w(LOG_TAG, "warning     - Meldung");
 		Log.e(LOG_TAG, "error       - Meldung");
 
+		// Auslesen der ausgewählten Aktienliste aus den SharedPreferences
+		SharedPreferences sPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+		String prefAktienlisteKey = getString(R.string.preference_ipaddress_key);
+		String prefAktienlisteDefault = getString(R.string.preference_ipaddress_default);
+		String ipaddress = sPrefs.getString(prefAktienlisteKey,prefAktienlisteDefault);
+
+		String URL = "http://"+ipaddress+"/web/";
 
 		ArrayList<HashMap<String, String>> menuServices = new ArrayList<HashMap<String, String>>();
 
